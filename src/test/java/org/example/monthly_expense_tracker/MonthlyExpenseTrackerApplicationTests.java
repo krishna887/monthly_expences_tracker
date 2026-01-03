@@ -1,10 +1,10 @@
-package org.example.monthly_expence_tracker;
+package org.example.monthly_expense_tracker;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MonthlyExpenceTrackerApplicationTests {
+class MonthlyExpenseTrackerApplicationTests {
 
   @Test
   void contextLoads() {

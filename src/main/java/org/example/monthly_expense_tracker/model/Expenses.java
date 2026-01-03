@@ -1,4 +1,4 @@
-package org.example.monthly_expence_tracker.model;
+package org.example.monthly_expense_tracker.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,10 +10,10 @@ import java.util.Date;
 
 @Entity
 @Data
-public class Expences {
+public class Expenses {
   @Id
   @GeneratedValue(strategy =  GenerationType.IDENTITY)
-  private int id;
+  private Integer id;
   private String title;
   private Date date;
   private double pricePerTitle;
