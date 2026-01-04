@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -15,7 +15,6 @@ public class Expenses {
   @GeneratedValue(strategy =  GenerationType.IDENTITY)
   private Integer id;
   private String title;
-  private Date date;
+  private LocalDate date;
   private double pricePerTitle;
-  private double totalPrice;
 }

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Add Expenses</title>
+    <style>
+        table { border-collapse: collapse; width: 60%; }
+        th, td { border: 1px solid #ccc; padding: 8px; }
+        button.add-row { margin-bottom: 10px; }
+    </style>
+  </head>
+  <body>
+
+    <h2>Add Expenses</h2>
+
+    <form th:action="@{/expenses/add}" th:object="${expenseForm}" method="post">
+
+      <!-- Date -->
+      <label>Date:</label>
+      <input type="date" th:field="*{date}" required />
+      <br><br>
+
+      <!-- Totals -->
+      <div>
+        <strong>Today's Total:</strong> <span th:text="${dailyTotal}">0</span> |
+        <strong>Month Total:</strong> <span th:text="${monthlyTotal}">0</span>
+      </div>
+      <br>
+
+      <!-- Add Row Button -->
+      <button type="button" class="add-row" onclick="addRow()">+ Add Row</button>
+      <br>
+
+      <!-- Expense table -->
+      <table id="expenseTable">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="item, stat : *{items}">
+            <td>
+              <input type="text" th:field="*{items[__${stat.index}__].name}" placeholder="food" required />
+            </td>
+            <td>
+              <input type="number" th:field="*{items[__${stat.index}__].price}" step="0.01" placeholder="100" required />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <br>
+      <button type="submit">Save</button>
+
+    </form>
+
+    <script>
+      function addRow() {
+          const tableBody = document.getElementById('expenseTable').getElementsByTagName('tbody')[0];
+          const newRow = tableBody.rows[0].cloneNode(true); // clone first row
+
+          // clear inputs in new row
+          newRow.querySelectorAll('input').forEach(input => input.value = '');
+
+          tableBody.appendChild(newRow);
+          updateIndexes();
+      }
+
+      // Update th:field indexes dynamically
+      function updateIndexes() {
+          const rows = document.querySelectorAll('#expenseTable tbody tr');
+          rows.forEach((row, i) => {
+              row.querySelectorAll('input').forEach(input => {
+                  const fieldName = input.getAttribute('th:field');
+                  if (fieldName) {
+                      const newField = fieldName.replace(/\[\d+\]/, `[${i}]`);
+                      input.setAttribute('name', input.getAttribute('th:field').replace(/\*\{/, '').replace(/\}/, '').replace(/\[\d+\]/, `[${i}]`));
+                  }
+              });
+          });
+      }
+    </script>
+
+  </body>
+</html>
