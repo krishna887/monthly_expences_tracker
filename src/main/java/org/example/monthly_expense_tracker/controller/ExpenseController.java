@@ -61,7 +61,7 @@ public class ExpenseController {
     form.getItems().add(new ExpenseItemDto()); // 1 empty row
 
 
-    model.addAttribute("expenseForm", expenseForm);
+    model.addAttribute("expenseForm", form);
     model.addAttribute("dailyTotal", dailyTotal);
     model.addAttribute("monthlyTotal", monthlyTotal);
     return "expense-form";

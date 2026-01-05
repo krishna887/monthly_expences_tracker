@@ -21,9 +21,23 @@
 
       <!-- Totals -->
       <div>
-        <strong>Today's Total:</strong> <span th:text="${dailyTotal}">0</span> |
-        <strong>Month Total:</strong> <span th:text="${monthlyTotal}">0</span>
+        <strong>
+          Total for
+          <span th:text="${#temporals.format(expenseForm.date, 'dd MMM yyyy')}">
+      01 Jan 2026
+    </span>:
+        </strong>
+        <span th:text="${dailyTotal}">0</span>
+        |
+        <strong>
+          Total for
+          <span th:text="${#temporals.format(expenseForm.date, 'MMMM yyyy')}">
+      January 2026
+    </span>:
+        </strong>
+        <span th:text="${monthlyTotal}">0</span>
       </div>
+
       <br>
 
       <!-- Add Row Button -->
